@@ -10,18 +10,25 @@
     function controller($scope, socket) {
         $scope.data = [];
 
+        socket.on('connected', function (res) {
+            console.log('socket connected!');
+            if (res && res.isUpdate) {
+                $scope.data = [];
+                socket.emit('get-item', {}, function () {
+                });
+            }
+        });
+
+
         socket.on('new-item', function (res) {
             console.log(res.item);
             $scope.data.push(res.item);
 
         });
 
-        socket.on('repo-info', function (res) {
-            if (res && res.isUpdate) {
-                socket.emit('get-item', {}, function () {
-                    console.log('oh ho');
-                });
-            }
+        socket.on('disconnect', function () {
+            console.log('socket disconnected!');
+            socket.reconnect();
         });
 
         socket.on('show-item', function (res) {

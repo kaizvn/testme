@@ -6,17 +6,17 @@
 
 var express = require('express')
     , app = express()
-    , http = require('http').Server(app)
     , bodyParser = require('body-parser')
-    , io = require('socket.io')(http)
+    , io = require('socket.io')(8282)
     , repository = require('./app/modules/controllers/RepositoryCtrl');
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-http.listen(8282);
-io.on('connection', repository.response);
+
+io.on('connection', repository.connect);
+
 
 app.route('/items')
     .get(repository.getItems)
