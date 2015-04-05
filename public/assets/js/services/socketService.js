@@ -3,7 +3,7 @@
  */
 
 
-(function (App) {
+(function (app) {
     'use strict';
     var serviceName = 'socket';
     var url = 'http://' + window.location.hostname + ':8282';
@@ -45,8 +45,8 @@
 
     service.$inject = ['$rootScope'];
 
-    App.factory(serviceName, service);
+    app.factory(serviceName, service);
 
-})(app);
+})(App);
 
 

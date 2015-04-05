@@ -28,10 +28,10 @@ li.new-item {
 @keyframes new-item-animation {
   from {
     opacity: 0;
-    -webkit-transform: translateY(600px);
-    -ms-transform: translateY(600px);
-    -o-transform: translateY(600px);
-    transform: translateY(600px);
+    -webkit-transform: translateY(-600px);
+    -ms-transform: translateY(-600px);
+    -o-transform: translateY(-600px);
+    transform: translateY(-600px);
 
   }
 
@@ -56,8 +56,8 @@ li.new-item {
 @-webkit-keyframes new-item-animation {
   from {
     opacity: 0;
-    -webkit-transform: translateY(600px);
-    transform: translateY(600px);
+    -webkit-transform: translateY(-600px);
+    transform: translateY(-600px);
   }
 
   to {
@@ -93,18 +93,23 @@ li.new-item {
 
 li.item {
   list-style: none;
-  background-color: #2B95A3;
+  background-color: #3e8f3e;
   display: inline-block;
-  -webkit-transform: scaleY(-1);
-  transform: scaleY(-1);
+  /*-webkit-transform: scaleY(-1);
+  transform: scaleY(-1);*/
   height: 60px;
   border: 1px solid #ccc;
   padding: 10px;
   margin: 5px;
+  align-items: center;
 }
 
-li.item:nth-child(odd) {
-  background-color: #3e8f3e;
+li.item:nth-child(even) {
+  background-color: #2B95A3;
+}
+
+li.item.ui-sortable-helper {
+  background-color: #a31417;
 }
 
 .holder {
@@ -113,8 +118,17 @@ li.item:nth-child(odd) {
 }
 
 #item-basket {
-  position: relative;
-  -webkit-transform: scaleY(-1);
-  transform: scaleY(-1);
+  display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
   text-align: center;
+
+  justify-content: center;
+  flex-wrap: wrap-reverse;
+  flex-direction: row-reverse;
 }
