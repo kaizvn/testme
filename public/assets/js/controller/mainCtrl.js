@@ -3,7 +3,7 @@
  */
 
 
-(function (App) {
+(function (app) {
     'use strict';
     var ctrlName = 'MainCtrl';
 
@@ -34,10 +34,25 @@
         socket.on('show-item', function (res) {
             res.item && $scope.data.push(res.item);
         });
+
+
+        socket.on('dnd-drag-pos', function (res) {
+            $scope.updateData(res.dragIndex, res.dropIndex);
+        });
+
+        $scope.updateData = function (dragIndex, dropIndex) {
+            var moveIndex = $scope.data.splice(dragIndex, 1)[0];
+            !!(moveIndex) && $scope.data.splice(dropIndex, 0, moveIndex);
+
+            return !!(moveIndex);
+        }
+
+        $scope.$watch("data", function () {
+        }, true);
     }
 
     controller.$inject = ['$scope', 'socket'];
 
-    App.controller(ctrlName, controller);
+    app.controller(ctrlName, controller);
 
-})(app);
+})(App);

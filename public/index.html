@@ -9,7 +9,7 @@
 <body ng-app="testApp">
 <div class="row" ng-controller="MainCtrl">
     <div class="holder">
-        <ul id="item-basket" class="reminders">
+        <ul id="item-basket" dnd-data="data">
             <li ng-repeat="datum in data" class="item new-item">{{datum["name"]}}</li>
         </ul>
     </div>
@@ -17,19 +17,22 @@
 
 
 <script src="lib/jquery/dist/jquery.min.js"></script>
+<script src="lib/jquery-ui/jquery-ui.min.js"></script>
 <script src="lib/lodash/lodash.min.js"></script>
-<script src="lib/angularjs/angular.min.js"></script>
+<script src="lib/angular/angular.min.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="lib/socket.io-client/socket.io.js"></script>
 
 
 <script src="assets/js/app.js"></script>
 <script src="assets/js/services/socketService.js"></script>
+<script src="assets/js/directives/dragnDrop.js"></script>
+<script src="assets/js/controller/mainCtrl.js"></script>
+
 <!-- // old way get data
 <script src="assets/js/services/callAPIService.js"></script>
 <script src="assets/js/services/repositoryService.js"></script>
 --->
-<script src="assets/js/controller/mainCtrl.js"></script>
 
 </body>
 </html>

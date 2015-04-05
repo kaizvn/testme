@@ -9,6 +9,7 @@ var count = 0;
 
 exports.connect = function (socket) {
     count++;
+    console.log('an user has connected');
     console.log('connected: %s', count);
 
     socket.emit('connected', {
@@ -24,8 +25,15 @@ exports.connect = function (socket) {
 
     socket.on('disconnect', function () {
         count--;
-        console.log('one user has disconnected');
+        console.log('an user has disconnected');
         console.log('connected: %s', count);
+    });
+
+    socket.on('dnd-item', function (req) {
+        console.log(req);
+        var updateRepo = model.updateDragItem(req.dragIndex, req.dropIndex);
+        console.log(updateRepo);
+        updateRepo && socket.broadcast.emit('dnd-drag-pos', req);
     });
 
 };

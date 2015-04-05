@@ -2,9 +2,3 @@
 node_modules/*
 public/lib/*
 *.log
-
-public/assets/css/main.css.bak
-public/assets/js/dropdrag.js
-public/assets/js/effects.js
-public/assets/js/services/callAPIService.js
-public/assets/js/services/repositoryService.js

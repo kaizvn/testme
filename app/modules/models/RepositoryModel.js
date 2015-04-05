@@ -8,7 +8,7 @@ var dataObj = require('../../assets/data/tempData.json');
 var MAX_ITEM = 50;
 
 function Repository() {
-    // get top
+    // get top items into repository
     this.items = dataObj.data.items.slice(0, MAX_ITEM);
 }
 
@@ -31,6 +31,17 @@ Repository.prototype.setItem = function (item) {
         console.log(e);
         return false;
     }
+};
+
+/* Update the data in repository */
+Repository.prototype.updateDragItem = function (dragIndex, dropIndex) {
+    var toMove = this.items.splice(dragIndex, 1)[0];
+    if (toMove === undefined) return false;
+
+    this.items.splice(dropIndex, 0, toMove);
+    return true;
+
+
 };
 
 Repository.prototype.emitItem = function (type, socket, item) {
