@@ -5,10 +5,11 @@
 'use strict';
 
 var dataObj = require('../../assets/data/tempData.json');
+var MAX_ITEM = 50;
 
 function Repository() {
-    // get top 100
-    this.items = dataObj.data.items.slice(0, 100);
+    // get top
+    this.items = dataObj.data.items.slice(0, MAX_ITEM);
 }
 
 Repository.prototype.getItemList = function () {
@@ -38,7 +39,7 @@ Repository.prototype.emitItem = function (type, socket, item) {
             socket.sockets.emit('new-item', {type: type, item: item});
             break;
 
-        case 'init':
+        case 'send-items':
             socket.emit('show-item', {type: type, item: item});
             break;
 
