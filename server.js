@@ -19,8 +19,11 @@ io.on('connection', repository.connect);
 
 
 app.route('/items')
-    .get(repository.getItems)
+    .get(repository.getItem)
     .post(repository.newItem(io));
+
+app.route('/items/:id')
+    .get(repository.getItem)
 
 app.use(express.static('public'));
 

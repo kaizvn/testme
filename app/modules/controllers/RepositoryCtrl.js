@@ -30,9 +30,7 @@ exports.connect = function (socket) {
     });
 
     socket.on('dnd-item', function (req) {
-        console.log(req);
         var updateRepo = model.updateDragItem(req.dragIndex, req.dropIndex);
-        console.log(updateRepo);
         updateRepo && socket.broadcast.emit('dnd-drag-pos', req);
     });
 
@@ -42,6 +40,7 @@ exports.connect = function (socket) {
 exports.newItem = function (socket) {
     return function (req, res) {
         var item = req.body;
+        if (!item.name || item.name === '') return;
 
         var isAdded = model.setItem(item);
         if (isAdded) {
@@ -57,9 +56,18 @@ exports.newItem = function (socket) {
 };
 
 
-exports.getItems = function (req, res) {
-    var item = model.getItemList();
-    item && res.json(item);
+exports.getItem = function (req, res) {
+    var data = model.getItemList();
+    var result = {};
+    if (!req.params.id) {
+        result = data;
+    } else {
+        result = [].filter.call(data, function (item) {
+            return item.id == req.params.id;
+        });
+    }
+
+    result && res.json(result);
     res.end();
 };
 
