@@ -1,9 +1,9 @@
 # testme project
 
-## Requiremnents: 
+## Requirements:
   - Crawling data from a website, and show its items with falling effect.
   - Has new item: broadcast event to all users.
-  - User can make change by 'drag&drop', also broadcast event for letting everybody see the change.
+  - User can make change by 'drag n drop', also broadcast event for letting everybody see the change.
   
 ## Done:
   - Initial project.
@@ -11,7 +11,7 @@
   - Setup emit/listen events.
   - Everyone can see new item added.
 
-        addItemsAPI = {
+        addNew_API = {
                  url : 'http://host:port/items', // default:  http://localhost:8080/items
                  type : 'POST',
                  params : { name : 'whatever you want' }
@@ -21,10 +21,11 @@
   
 ## On-going:
   - Create add item page for testing purpose.
-  - crawling data....
+  - Handle disconnect event.
+  - crawling data.
 
 ## Know-issues:
-  - Move item on top to bottom => other listeners will see items from <start> to <end> do falling effects. workaround : disable effect when drag n drop.
+  - Move `item` at low position to high: others will see group items from `start` to `end` do falling effects, instead of only `movedItem`. Workaround : disable effect when `drag n drop`.
 
 
 ## How to run: 
@@ -37,4 +38,3 @@
   
         $ node server
 
-  
