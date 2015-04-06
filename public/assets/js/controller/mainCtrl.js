@@ -7,18 +7,22 @@
     'use strict';
     var ctrlName = 'MainCtrl';
 
-    function controller($scope, socket) {
+    function controller($scope, socket, $http) {
         $scope.data = [];
+        $scope.connections = -1;
 
         socket.on('connected', function (res) {
             console.log('socket connected!');
             if (res && res.isUpdate) {
                 $scope.data = [];
-                socket.emit('get-item', {}, function () {
-                });
+                $scope.connections = res.connections;
+                socket.emit('get-item', {});
             }
         });
 
+        socket.on('update-count', function (res) {
+            $scope.connections = res.connections;
+        });
 
         socket.on('new-item', function (res) {
             console.log(res.item);
@@ -32,7 +36,7 @@
         });
 
         socket.on('show-item', function (res) {
-            res.item && $scope.data.push(res.item);
+            $scope.data = (res.item && res.item.length) ? res.item : $scope.data;
         });
 
 
@@ -47,11 +51,28 @@
             return !!(moveIndex);
         }
 
+        //
+
+        $scope.addItem = function () {
+            console.log('name %s', $scope.textContent);
+            $http.post('/items',
+                {name: $scope.textContent})
+                .success(function (res) {
+                    if (res.status === 'ok') {
+                        $scope.textContent = '';
+                    }
+                })
+                .error(function (err) {
+                    console.error(err);
+                })
+
+        };
+
         $scope.$watch("data", function () {
         }, true);
     }
 
-    controller.$inject = ['$scope', 'socket'];
+    controller.$inject = ['$scope', 'socket', '$http'];
 
     app.controller(ctrlName, controller);
 

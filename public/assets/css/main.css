@@ -132,3 +132,8 @@ li.item.ui-sortable-helper {
   flex-wrap: wrap-reverse;
   flex-direction: row-reverse;
 }
+
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
