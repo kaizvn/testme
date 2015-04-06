@@ -4,12 +4,15 @@
 
 'use strict';
 
-var dataObj = require('../../assets/data/tempData.json');
-var MAX_ITEM = 50;
+var dataObj = require('../../assets/data/tempData.json')
+    , MAX_ITEM = 50
+    , connections = 0;
+
 
 function Repository() {
     // get top items into repository
     this.items = dataObj.data.items.slice(0, MAX_ITEM);
+    this.connections = connections;
 }
 
 Repository.prototype.getItemList = function () {
@@ -59,6 +62,19 @@ Repository.prototype.emitItem = function (type, socket, item) {
     }
     return false;
 };
+
+
+Repository.prototype.updateCount = function (isConnected) {
+    console.log(this.connections);
+    (isConnected) ? this.connections++ : this.connections--;
+  //  this.connections = (this.connections < 0) ? 0 : this.connections;
+    console.log(this.connections);
+    return this.connections;
+};
+
+Repository.prototype.emitCount = function (socket) {
+    socket.broadcast.emit('update-count', {connections: this.connections});
+}
 
 
 module.exports = Repository;

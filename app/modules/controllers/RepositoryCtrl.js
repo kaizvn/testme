@@ -5,29 +5,34 @@
 'use strict';
 var Model = require('../models/RepositoryModel');
 var model = new Model();
-var count = 0;
 
 exports.connect = function (socket) {
-    count++;
     console.log('an user has connected');
+    var count = model.updateCount(true);
     console.log('connected: %s', count);
 
+
     socket.emit('connected', {
-        isUpdate: (model.getItemList().length > 0)
+        isUpdate: (model.getItemList().length > 0),
+        connections: count
     });
+
+    model.emitCount(socket);
+
 
     socket.on('get-item', function () {
         var data = model.getItemList();
-        //[].forEach.call(data, function (item) {
-            model.emitItem('send-items', socket, data);
-        //});
+        model.emitItem('send-items', socket, data);
     });
 
     socket.on('disconnect', function () {
-        count--;
         console.log('an user has disconnected');
+        var count = model.updateCount(false);
         console.log('connected: %s', count);
+
+        model.emitCount(socket);
     });
+
 
     socket.on('dnd-item', function (req) {
         var updateRepo = model.updateDragItem(req.dragIndex, req.dropIndex);

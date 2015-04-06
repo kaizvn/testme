@@ -33,7 +33,7 @@ app.route('/items/:id')
 app.use(express.static('public'));
 
 
-var server = app.listen('8080', '0.0.0.0', function () {
+var server = app.listen('8888', '0.0.0.0', function () {
     var sv = server.address();
     console.log('server started at %s:%s', sv.address, sv.port);
 });
