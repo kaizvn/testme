@@ -18,10 +18,11 @@
               }
 
   - Drag & Drop item, update list.
+  - Create add item form for testing purpose.
+  - Handle disconnect event.
+  - Count users.
   
 ## On-going:
-  - Create add item page for testing purpose.
-  - Handle disconnect event.
   - crawling data.
 
 ## Know-issues:

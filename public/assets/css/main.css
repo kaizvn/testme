@@ -101,6 +101,7 @@ li.item {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 5px;
+  -webkit-align-items: center;
   align-items: center;
 }
 
@@ -118,17 +119,25 @@ li.item.ui-sortable-helper {
 }
 
 #item-basket {
+  text-align: center;
+
   display: -webkit-flexbox;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+
   -webkit-flex-align: center;
   -ms-flex-align: center;
+
   -webkit-align-items: center;
   align-items: center;
-  text-align: center;
 
+  -webkit-justify-content: center;
   justify-content: center;
+
+  -webkit-flex-wrap: wrap-reverse;
+  -webkit-flex-direction: row-reverse;
+
   flex-wrap: wrap-reverse;
   flex-direction: row-reverse;
 }
