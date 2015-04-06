@@ -14,8 +14,7 @@
             console.log('socket connected!');
             if (res && res.isUpdate) {
                 $scope.data = [];
-                socket.emit('get-item', {}, function () {
-                });
+                socket.emit('get-item', {});
             }
         });
 
@@ -32,7 +31,7 @@
         });
 
         socket.on('show-item', function (res) {
-            res.item && $scope.data.push(res.item);
+            $scope.data = (res.item && res.item.length) ? res.item : $scope.data;
         });
 
 

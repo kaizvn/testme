@@ -18,9 +18,9 @@ exports.connect = function (socket) {
 
     socket.on('get-item', function () {
         var data = model.getItemList();
-        [].forEach.call(data, function (item) {
-            model.emitItem('send-items', socket, item);
-        });
+        //[].forEach.call(data, function (item) {
+            model.emitItem('send-items', socket, data);
+        //});
     });
 
     socket.on('disconnect', function () {
