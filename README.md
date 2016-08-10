@@ -1,5 +1,4 @@
 # testme project
-  - this is a test.
   
 ## Requirements:
   - Crawling data from a website, and show its items with falling effect.
